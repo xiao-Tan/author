@@ -1,0 +1,20 @@
+<div class="container">
+    <p><button [routerLink]="['/']" class="btn btn-outline-info">Home</button></p>
+    <h4>Provide a quote by {{name}}:</h4>
+    <form (submit)="onSubmit()">
+        <p>{{newQuote | json}}</p>
+        <div class="form-group">
+            <label for="quote">Quote</label>
+            <textarea type="text" class="form-control" id="quote" [(ngModel)]="newQuote.quote" name="quote"></textarea>
+        </div>
+        <div *ngIf="new_error.length > 0">
+            <ul *ngFor="let error of new_error">
+                <li>{{error}}</li>
+            </ul>
+        </div>
+        <p class="text-center">
+            <button class="btn btn-outline-info" type="submit">Create Quote</button>
+            <button class="btn btn-outline-info" [routerLink]="['/quotes', id]">Cancel</button>
+        </p>
+    </form>
+</div>

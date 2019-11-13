@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Quote Ranks</h1>
+  <div *ngIf="_route.children.length === 0">
+    <p><button [routerLink]="['/new']" class="btn btn-outline-info">Add a quotable author</button></p>
+    <h4>We have quotes by:</h4>
+    <table class="table table-striped table-active">
+      <thead>
+        <tr>
+          <th scope="col">Author</th>
+          <th scope="col">Actions avaliable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of authors">
+          <th scope="row">{{a['name']}}</th>
+          <td>
+            <button  class="btn btn-outline-info" [routerLink]="['/edit', a['_id']]">Edit!</button>
+            <button [routerLink]="['/quotes', a['_id']]" class="btn btn-outline-warning">View Quotes!</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<router-outlet></router-outlet>

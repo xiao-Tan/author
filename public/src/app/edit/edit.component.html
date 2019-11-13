@@ -1,0 +1,24 @@
+<div class="container">
+    <p><button [routerLink]="['/']" class="btn btn-outline-info">Home</button></p>
+    <h4>Edit quotable author:</h4>
+    <form (submit)="onSubmit()">
+        <p>{{editAuthor | json}}</p>
+        <div *ngIf="!name.valid" class="text-danger">Name invalid {{name.errors | json}}</div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="editAuthor.name" name="name" 
+            required
+            minlength="3"
+            #name = 'ngModel'>
+        </div>
+        <div *ngIf="edit_error.length > 0">
+            <ul *ngFor="let error of edit_error">
+                <li>{{error}}</li>
+            </ul>
+        </div>
+        <p class="text-center">
+            <button class="btn btn-outline-info" type="submit">Edit Author</button>
+            <button class="btn btn-outline-info" [routerLink]="['/']">Cancel</button>
+        </p>
+    </form>
+</div>
