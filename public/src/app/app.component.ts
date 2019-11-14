@@ -15,7 +15,7 @@ export class AppComponent {
     private _httpService: HttpService,
     public _route: ActivatedRoute
   ) { }
-
+  
   ngOnInit(){
     this.getAllAuthors();
   }
@@ -24,6 +24,13 @@ export class AppComponent {
     this._httpService.getAuthors()
       .subscribe(data => {
         this.authors = data['result']
+      })
+  }
+
+  delete(id){
+    this._httpService.deleteAuthor(id)
+      .subscribe(data => {
+        this.getAllAuthors();
       })
   }
 }

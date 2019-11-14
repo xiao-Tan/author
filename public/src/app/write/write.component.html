@@ -3,9 +3,14 @@
     <h4>Provide a quote by {{name}}:</h4>
     <form (submit)="onSubmit()">
         <p>{{newQuote | json}}</p>
+        <div *ngIf="!quote.valid && quote.errors.required" class="text-danger">* Quote is required</div>
+        <div *ngIf="!quote.valid && quote.errors.minlength" class="text-danger">* Quote should be at least 3 characters</div>
         <div class="form-group">
             <label for="quote">Quote</label>
-            <textarea type="text" class="form-control" id="quote" [(ngModel)]="newQuote.quote" name="quote"></textarea>
+            <textarea type="text" class="form-control" id="quote" [(ngModel)]="newQuote.quote" name="quote"
+            required
+            minlength="3"
+            #quote = 'ngModel'></textarea>
         </div>
         <div *ngIf="new_error.length > 0">
             <ul *ngFor="let error of new_error">

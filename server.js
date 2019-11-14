@@ -28,7 +28,7 @@ const Quote = mongoose.model("Quote", QuoteSchema);
 const Author = mongoose.model("Author", AuthorSchema);
 
 app.get('/authors', (request, response) => {
-    Author.find()
+    Author.find().collation({'locale':'en'}).sort({name: 1})
         .then(data => response.json({ message: "success", result: data }))
         .catch(err => response.json(err))
 })
@@ -64,6 +64,12 @@ app.delete('/author/:a_id/:q_id', (request, response) => {
         .then(data => response.json({ message: "success", result: data }))
         .catch(err => response.json(err))
 })
+
+app.delete('/author/:id',(request, response) => {
+    Author.remove({_id: request.params.id})
+        .then(data => response.json({ message: "success", result: data }))
+        .catch(err => response.json(err))
+} )
 
 app.put('/up/:a_id/:q_id', (request, response) => {
     Author.update({  _id: request.params.a_id, "quotes._id": request.params.q_id }, { $inc: {"quotes.$.vote": 1}})

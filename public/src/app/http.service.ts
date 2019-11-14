@@ -32,6 +32,10 @@ export class HttpService {
     return this._http.delete(`/author/${a_id}/${q_id}`)
   }
 
+  deleteAuthor(id){
+    return this._http.delete(`/author/${id}`)
+  }
+
   voteUp(a_id, q_id, vote){
     return this._http.put(`/up/${a_id}/${q_id}`, vote)
   }
